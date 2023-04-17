@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 export class ProductManager {
 
@@ -6,8 +6,6 @@ export class ProductManager {
         this.products = [];
         this.path = path;
     };
-
-    // Private methods
 
 
     #validateCodeProduct = async (obj) => {
@@ -39,10 +37,11 @@ export class ProductManager {
         catch (err) {
             console.log(err);
         }
-
     };
 
-    // Methods for Fyle System
+
+
+    // Methods for FS
 
     #saveProductsFS = async () => {
         try {
@@ -52,7 +51,6 @@ export class ProductManager {
         }
         catch (err) {
             return console.log(err);
-
         }
     };
 
@@ -70,22 +68,23 @@ export class ProductManager {
         }
         console.log(`The file does not exist`);
         return [];
-
     };
 
     getProductById = async (id) => {
+        id = Number(id);
         try {
             const products = await this.#checkID(id)
             if (!products) {
-                return console.log(`Product not found. ID: ${id}`);
+                return {status:'error', message: `Product not found. ID: ${id}`};
             }
-            return console.log(`The product is:`, products[id - 1]);
+            const product = products.find(product => product.id === id)
+            return {status:'success', product: product};
         }
         catch (err) {
             return console.log(err);
         }
-
     };
+    
 
     updateProduct = async (pid, updateObject) => {
         try {
@@ -99,7 +98,6 @@ export class ProductManager {
                 return element
             })
 
-
             this.#saveProductsFS();
             return console.log(`The product was successfully updated:`, this.products);
         }
@@ -111,7 +109,6 @@ export class ProductManager {
     }
 
     deleteProduct = async (id) => {
-
         try {
             const products = await this.#checkID(id)
             if (!products) return console.log(`Product not found. ID: ${id}`);
@@ -128,11 +125,8 @@ export class ProductManager {
         catch (err) {
             return console.log(err);
         }
-
-
     }
 
-    // Public methods
 
     addProduct = async (title, description, price, thumbail, code, stock) => {
         this.products = await this.getProducts()
@@ -156,72 +150,5 @@ export class ProductManager {
 };
 
 
-
-
 const productsInstance = new ProductManager('./db.json');
 
-
-
-//TESTS//
-
-
-
-// * AGREGA LOS PRODUCTOS AL db.jason *
-
-
-const test = async () => {
-    // await productsInstance.addProduct("Lampara de Monos", "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores", 4000, "https://i.postimg.cc/nryMFSN7/personalizado-monkey.jpg", 2121, 12)
-
-    // await productsInstance.addProduct("Lampara Articulada", "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores", 4500, "https://i.postimg.cc/SQJdDZ7G/personalizado-lamp.webp", 2122, 10)
-
-    // await productsInstance.addProduct("Wolverine", "Figura impresa en 3D, Material PLA, 6mm x 12mm - Sin pintar", 3500, ".https://i.postimg.cc/2jM0JSwB/coleccion-wolverine.jpg", 2123, 20)
-
-
-    // await productsInstance.addProduct("Spiderman", "Figura impresa en 3D, Material PLA, 6mm x 12mm - Sin pintar", 3500, "https://i.postimg.cc/0QNJc9SW/coleccion-spiderman.jpg", 2124, 20)
-
-
-    // await productsInstance.addProduct("Cuadro de Tiburones", "Cuadro impreso en 3D, Material PLA, 200mm x 200mm - Disponible en varios colores", 320, "https://i.postimg.cc/c4Ccrv2L/deco-sharks.jpg", 2125, 11)
-
-    // await productsInstance.addProduct("Cuadro de Montañas", "Cuadro impreso en 3D, Material PLA, 200mm x 200mm - Disponible en varios colores", 1300, "https://i.postimg.cc/RFPHBRMQ/deco-mountains.jpg", 2126, 11)
-
-
-
-
-
-    // * MUESTRA LOS PRODUCTOS DESDE EL db.json **
-
-    // await productsInstance.getProducts()
-
-
-
-
-    // * MUESTRA EL PRODUCTO POR EL ID  *
-
-    //await productsInstance.getProductById(3)
-    //await productsInstance.getProductById(2)
-
-
-
-
-
-    // * ACTUALIZA EL PRODUCTO POR EL ID DESDE *
-
-    // await productsInstance.updateProduct(2, {
-    //     "title": "Lampara IronMan",
-    //     "description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
-    //     "price": 7000,
-    //     "thumbail": "./img/Ironman",
-    //     "code": 2727,
-    //     "stock": 5,
-    // },)
-
-
-
-
-
-    // * ELIMINA EL PRODUCTO POR ID  *
-
-//   // await productsInstance.deleteProduct(2)
-};
-
-test();
