@@ -1,0 +1,17 @@
+{
+  "name": "primera-entrega-proyecto-final",
+  "version": "1.0.0",
+  "description": "Primera Entrega Proyecto Final",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gerardo Linares",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
