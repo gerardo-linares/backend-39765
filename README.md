@@ -56,8 +56,16 @@ Debe tener un método deleteProduct, el cual debe recibir un id y debe eliminar 
 Formato del entregable.
 
 
-DESAFÍO 3 (Próximamente)
+DESAFÍO 3 
+
+En esta tarea se solicitó crear un servidor basado en Express que utiliza la clase ProductManager con persistencia de archivos para manejar los productos. Se agregaron dos endpoints:
+
+La ruta /products que lee el archivo de productos y devuelve un objeto con todos los productos. Además, se agregó soporte para recibir por query param el valor ?limit= para limitar el número de resultados devueltos.
+La ruta /products/:pid que recibe por req.params el pid (product Id) y devuelve sólo el producto solicitado en lugar de todos los productos.
 
 
 
 
+DESAFÍO 4 
+
+En estas consignas se solicita la configuración del servidor para integrar el motor de plantillas Handlebars y un servidor de socket.io. Se debe crear una vista "index.handlebars" que contenga una lista de todos los productos agregados hasta el momento y otra vista "realTimeProducts.handlebars" que trabajará con websockets y contendrá la misma lista de productos. Cada vez que se cree o elimine un producto, la lista se actualizará automáticamente en la vista de tiempo real. Se recomienda la creación de un formulario simple en la vista "realTimeProducts.handlebars" para enviar el contenido desde websockets y no HTTP.
