@@ -1,11 +1,11 @@
 {
-  "name": "primera-entrega-proyecto-final",
+  "name": "proyecto-final",
   "version": "1.0.0",
-  "description": "Primera Entrega Proyecto Final",
+  "description": "Proyecto Final",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gerardo Linares",
