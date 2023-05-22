@@ -69,3 +69,8 @@ La ruta /products/:pid que recibe por req.params el pid (product Id) y devuelve 
 DESAFÍO 4 
 
 En estas consignas se solicita la configuración del servidor para integrar el motor de plantillas Handlebars y un servidor de socket.io. Se debe crear una vista "index.handlebars" que contenga una lista de todos los productos agregados hasta el momento y otra vista "realTimeProducts.handlebars" que trabajará con websockets y contendrá la misma lista de productos. Cada vez que se cree o elimine un producto, la lista se actualizará automáticamente en la vista de tiempo real. Se recomienda la creación de un formulario simple en la vista "realTimeProducts.handlebars" para enviar el contenido desde websockets y no HTTP.
+
+
+ProyectoBackend(Práctica integradora)
+
+Implementado un modelo de persistencia utilizando MongoDB y Mongoose, con una base de datos llamada "ecommerce" en MongoDB Atlas. Las colecciones "carts", "messages" y "products" han sido creadas en la base de datos. Los esquemas correspondientes a cada colección se encuentran en la carpeta "dao/models". Se han separado los Managers de FileSystem de los Managers de MongoDB en la carpeta "dao". Los servicios han sido actualizados para funcionar con Mongoose en lugar de FileSystem, manteniendo FileSystem en el proyecto. Se ha implementado una nueva vista en Handlebars llamada "chat.handlebars" para mostrar un chat, donde los mensajes se guardan en la colección "messages" de MongoDB.
