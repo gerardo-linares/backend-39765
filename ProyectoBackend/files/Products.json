@@ -1,0 +1,69 @@
+[
+	{
+		"title": "Wolverine",
+		"description":  "Figura impresa en 3D, Material PLA, 6mm x 12mm - Sin pintar",
+		"price": 5000,
+		"thumbnails": ["https://i.postimg.cc/2jM0JSwB/coleccion-wolverine.jpg"],
+		"code": "abc123",
+		"stock": 25,
+		"status": true,
+		"category":"figuras",
+		"id": 1
+	},
+	{
+		"title": "Spiderman",
+		"description":  "Figura impresa en 3D, Material PLA, 6mm x 12mm - Sin pintar",
+		"price": 5000,
+		"thumbnails": ["https://i.postimg.cc/0QNJc9SW/coleccion-spiderman.jpg"],
+		"code": "abc1234",
+		"stock": 15,
+		"status": true,
+		"category":"figuras",
+		"id": 2
+	},
+	{
+		"title": "Lampara articulada",
+		"description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+		"price": 10000,
+		"thumbnails": ["https://i.postimg.cc/SQJdDZ7G/personalizado-lamp.webp"],
+		"code": "abc12345",
+		"stock": 5,
+		"status": true,
+		"category":"personalizado",
+		"id": 3
+	},
+	{
+		"title": "Lampara de monos",
+		"description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+		"price": 10000,
+		"thumbnails": ["https://i.postimg.cc/SQJdDZ7G/personalizado-lamp.webp"],
+		"code": "abc4443",
+		"stock": 8,
+		"status": true,
+		"category":"personalizado",
+		"id": 4
+	},
+	{
+		"title": "Cuadro de montañas",
+		"description": "Cuadro impreso en 3D, Material PLA, 200mm x 200mm - Disponible en varios colores",
+		"price": 2500,
+		"thumbnails": ["https://i.postimg.cc/RFPHBRMQ/deco-mountains.jpg"],
+		"code": "abc5234",
+		"stock": 11,
+		"status": true,
+		"category":"hogar",
+		"id": 5
+	},
+	{
+		"title": "Cuadro de tiburones",
+		"description": "Cuadro impreso en 3D, Material PLA, 200mm x 200mm - Disponible en varios colores",
+		"price": 2500,
+		"thumbnails": ["https://i.postimg.cc/c4Ccrv2L/deco-sharks.jpg"],
+		"code": "abc642345",
+		"stock": 11,
+		"status": true,
+		"category":"hogar",
+		"id": 6
+	}
+	
+]

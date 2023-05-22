@@ -1,0 +1,45 @@
+[
+	{
+		"products": [
+			{
+				"name": "Wolverine",
+				"price": "5000"
+			},
+			{
+				"name": "Spiderman",
+				"price": 5000
+			},
+			{
+				"product": 2,
+				"quantity": 1
+			}
+		],
+		"id": 1
+	},
+	{
+		"products": [
+			{
+				"name": "Lampara articulada",
+				"price": "10000"
+			},
+			{
+				"name": "Lampara de monos",
+				"price": "10000"
+			}
+		],
+		"id": 2
+	},
+	{
+		"products": [
+			{
+				"name": "Cuadro de montañas",
+				"price": "2500"
+			},
+			{
+				"name": "cuadro de monos",
+				"price": "2500"
+			}
+		],
+		"id": 3
+	}
+]
