@@ -1,0 +1,96 @@
+[
+  {
+    "id": 1,
+    "title": "Lampara Articulada",
+    "description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+    "code": 37,
+    "price": 9500,
+    "status": true,
+    "stock": 5006,
+    "category": "personalizado",
+    "thumbnails": [
+      "https://i.postimg.cc/SQJdDZ7G/personalizado-lamp.webp"
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Wolverine",
+    "description": "Figura impresa en 3D, Material PLA, 6mm x 12mm - Sin pintar",
+    "code": 50,
+    "price": 100,
+    "status": true,
+    "stock": 1000,
+    "category": "figuras",
+    "thumbnails": [
+      "https://i.postimg.cc/2jM0JSwB/coleccion-wolverine.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Lampara de Monos",
+    "description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+    "code": 33,
+    "price": 9500,
+    "status": true,
+    "stock": 500,
+    "category": "personalizado",
+    "thumbnails": [
+      "https://i.postimg.cc/SQJdDZ7G/personalizado-lamp.webp"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Lampara Test",
+    "description": "sin descripcion",
+    "code": "123123",
+    "status": true,
+    "price": 1,
+    "stock": 1,
+    "category": "personalizado"
+  },
+  {
+    "id": 5,
+    "title": "Lampara Articulada test test",
+    "description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+    "code": 40,
+    "price": 9500,
+    "status": true,
+    "stock": 5006,
+    "category": "personalizado",
+    "thumbnails": [
+      [
+        "URL_DE_TU_IMAGEN"
+      ]
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Lampara Articulada test test",
+    "description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+    "code": 42,
+    "price": 9500,
+    "status": true,
+    "stock": 5006,
+    "category": "personalizado",
+    "thumbnails": [
+      [
+        "URL_DE_TU_IMAGEN"
+      ]
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Lampara Articulada test test",
+    "description": "Lampara impresa en 3D, Material PLA, 6mm x 16mm - Disponible en varios colores",
+    "code": 403,
+    "price": 9500,
+    "status": true,
+    "stock": 5006,
+    "category": "personalizado",
+    "thumbnails": [
+      [
+        "URL_DE_TU_IMAGEN"
+      ]
+    ]
+  }
+]

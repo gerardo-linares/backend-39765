@@ -1,0 +1,62 @@
+
+<div class="container ">
+    <h1>Formulario para agregar productos</h1>
+</div>
+<section class="container mb-5">
+    <form id="form-product" action="#" method="POST" >
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre Producto: </label>
+        <input class="form-control" type="text" id="name" name="prod_name">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripcion: </label>
+        <input class="form-control" type="text" id="description" name="prod_description">
+    </div>
+    <div class="mb-3">
+        <label for="code" class="form-label">Codigo del producto: </label>
+        <input class="form-control" type="number" id="code" name="prod_code">
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Precio: </label>
+        <input class="form-control form-control-sm" id="price" type="text" name="prod_price">
+    </div>
+    <div>
+        <label for="stock" class="form-label">Stock: </label>
+        <input class="form-control form-control-lg" id="stock" type="text" name="prod_stock">
+    </div>
+    <div>
+        <label for="category" class="form-label">Categoria: </label>
+        <input class="form-control form-control-lg" id="category" type="text" name="prod_category">
+    </div>
+    <button id="btnAgregar">Agregar</button>
+    <button id="btnEliminar">Eliminar</button>
+</form>
+</section>
+
+<div class="container">
+    <h2>Listado de productos</h2>
+</div>
+
+<section class="container">
+    {{#each products}}
+    <div class="card m-5" data-code="{{code}}" style="width: 18rem;">
+        {{!-- <img src="..." class="card-img-top" alt="..."> --}}
+        <div class="card-body">
+            <h5 class="card-title text-center">{{title}}</h5>
+            <p class="card-text">Descripcion: {{description}}</p>
+            <p class="card-text">Categoria: {{category}}</p>
+            <p class="card-text">Codigo Nº: {{code}}</p>
+            <p class="card-text">Estado: {{status}}</p>
+            <p class="card-text">Stock: {{stock}}</p>
+            <p class="card-text">Precio: ${{price}}</p>
+            {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+        </div>
+    </div>
+{{/each}}
+</section>
+
+<div id="productContainer">
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realtimeproducts.js"></script>

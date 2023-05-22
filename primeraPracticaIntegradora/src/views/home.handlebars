@@ -1,0 +1,21 @@
+<h1>Listado de productos</h1>
+
+<section class="content">
+    {{#each products}}
+    <div class="card m-5 " style="width: 18rem;">
+        {{!-- <img src="..." class="card-img-top" alt="..."> --}}
+        <div class="card-body">
+            <h5 class="card-title text-center">{{title}}</h5>
+            <p class="card-text">Descripcion: {{description}}</p>
+            <p class="card-text">Categoria: {{category}}</p>
+            <p class="card-text">Codigo Nº: {{code}}</p>
+            <p class="card-text">Estado: {{status}}</p>
+            <p class="card-text">Stock: {{stock}}</p>
+            <p class="card-text">Precio: ${{price}}</p>
+            {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+        </div>
+    </div>
+{{/each}}
+</section>
+
+<script src="/js/home.js"></script>
