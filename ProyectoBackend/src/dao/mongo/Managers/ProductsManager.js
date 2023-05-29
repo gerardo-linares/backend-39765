@@ -2,7 +2,7 @@ import productsModel from "../models/products.js"
 
 export default class ProductsManager {
   getProducts = (params) => {
-    return productsModel.find(params).lean();
+    return productsModel.find(params);
   };
   
   getProductById = (productId) => {

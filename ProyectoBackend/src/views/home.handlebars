@@ -1,11 +1,7 @@
-<div>
-  <h1>Listado de Productos de {{name}}</h1>
-  <ul>
-    {{#each products}}
-      <li>Id: {{this.id}} - {{this.title}} - ${{this.price}}</li>
-    {{/each}}
+<div class="container">
+  <h1 class="title">{{name}}</h1>
+  <ul class="product-list">
+    <!-- Los elementos de la lista se generarán dinámicamente -->
   </ul>
+  <a href="/products" class="btn">Ver productos</a>
 </div>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/home.js"></script>

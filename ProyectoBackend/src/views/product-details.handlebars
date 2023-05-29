@@ -1,0 +1,29 @@
+<script>
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const cartId = document.getElementById('cartId').value;
+    window.location.href = `/carts/${cartId}`;
+  });
+</script>
+<div class="carts-container">
+  <h1 class="carts-container_title">Detalles del Producto "{{product.title}}"</h1>
+
+
+  <div class="carts-container_list">
+    <div class="carts-list">
+      <img class="carts-img" src={{product.thumbnails}} alt="{{product.title}}">
+      <ul class="carts-list_ul">
+        <li class="carts-list_item">Descripción: {{product.description}}</li>
+        <li class="carts-list_item">Precio: ${{product.price}}</li>
+        <li class="carts-list_item">Stock: {{product.stock}}</li>
+        <li class="carts-list_item">Categoría: {{product.category}}</li>
+        <li class="carts-list_item">Código: {{product.code}}</li>
+      </ul>
+
+
+    </div>
+    <form class="carts-form" action="/add-to-cart" method="POST">
+      <input type="hidden" name="productId" value="{{product._id}}">
+      <button type="submit">Agregar al carrito</button>
+    </form>
+  </div>

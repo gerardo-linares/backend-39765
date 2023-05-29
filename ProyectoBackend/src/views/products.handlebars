@@ -1,19 +1,31 @@
 
 
-
+<h1 class="products-title">Lista de Productos</h1>
 <div class="products-card">
-  <h1 class="products-title"> Lista de Productos</h1>
   {{#each products}}
   <div class="products-item">
     <p class="products-item__title">{{this.title}}</p>
-    <p>Descripción:{{this.description}}</p>
-    <p>Precio:${{this.price}}</p>
-    <p>Codigo:{{this.code}}</p>
-    <p>En stock:{{this.stock}}</p>
-    <p>Categoria:{{this.category}}</p>
-    <p>{{this.thumbnails}}</p>
+    <img class="products-img" src="{{this.thumbnails}}" alt={{this.title}}>
+  
+
+
+    <p>En stock: {{this.stock}}</p>
+    <p>Categoría: {{this.category}}</p>
+    <p>Precio: ${{this.price}}</p>
+    
     <p>{{this.status}}</p>
+    <a href="/products/{{this._id}}"><button>Ver Detalles</button></a>
   </div>
   {{/each}}
+</div>
 
+<!-- Botones de paginación -->
+<div class="products-btn">
+  {{#if hasPrevPage}}
+  <a href="/products/?page={{prevPage}}"><button>Anterior</button></a>
+  {{/if}}
+  {{page}}
+  {{#if hasNextPage}}
+  <a href="/products/?page={{nextPage}}"><button>Siguiente</button></a>
+  {{/if}}
 </div>

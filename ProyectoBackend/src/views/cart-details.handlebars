@@ -1,0 +1,36 @@
+<div class="carts-container">
+    <h1>Detalles del Carrito</h1>
+    <p>Carrito Id: {{cart._id}}</p>
+</div>
+
+{{#each cart.products}}
+<div class="carts-container-item">
+    <div class="carts-item-img">
+        <img src="{{this.product.thumbnails}}" alt="{{this.product.title}}" class="carts-item-img__small">
+    </div>
+    <div class="carts-item-details">
+        <h2 class="carts-card">{{this.product.title}}</h2>
+        <div class="carts-list-row">
+            <div class="carts-list-row_item">
+                <span class="carts-list_label">Descripción:</span>
+                <span class="carts-list_value">{{this.product.description}}</span>
+            </div>
+            <div class="carts-list-row_item">
+                <span class="carts-list_label">Precio:</span>
+                <span class="carts-list_value">${{this.product.price}}</span>
+            </div>
+            <div class="carts-list-row_item">
+                <span class="carts-list_label">Cantidad:</span>
+                <span class="carts-list_value">{{this.quantity}}</span>
+            </div>
+            <div class="carts-list-row_item">
+                <button class="carts-list_remove-button">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+<div class="carts-generate-order-button">
+    <button class="carts-generate-order-button__generate">Generar orden</button>
+</div>

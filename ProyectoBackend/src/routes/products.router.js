@@ -2,6 +2,7 @@ import { Router } from "express";
 //import ProductManager from "../../managers/fs/ProductManagers.js";
 import productsModel from "../dao/mongo/models/products.js"
 import ProductsManager from "../dao/mongo/Managers/ProductsManager.js";
+import usersModel from "../dao/mongo/models/products.js";
 
 const productManager = new ProductsManager();
 
@@ -12,8 +13,34 @@ const router = Router();
 /* MongoDB */
 router.get('/', async (req, res) => {
   try {
-    const products = await productManager.getProducts();
-    res.send({ status: "success", payload: products })
+    const { page = 1, category } = req.query;
+    const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } = await usersModel.paginate(
+      { /* category: "frutas" */ },
+      {
+        page, limit: 5,
+        lean: true,
+        sort: { price: 1 }
+      });
+    const products = docs
+
+    const totalPages = rest.totalPages;
+    const prevLink = hasPrevPage ? `/api/products?page=${prevPage}` : null;
+    const nextLink = hasNextPage ? `/api/products?page=${nextPage}` : null;
+
+    const result = {
+      status: "success",
+      payload: products,
+      totalPages,
+      prevPage,
+      nextPage,
+      page: rest.page,
+      hasPrevPage,
+      hasNextPage,
+      prevLink,
+      nextLink
+    };
+    res.send(result);
+    
   } catch (error) {
     console.log(error);
     res.status(500).send({ status: "error", error: 'Error interno del servidor' });
@@ -25,7 +52,7 @@ router.post('/', async (req, res) => {
     const { title, description, price, code, stock, category, thumbnails } = req.body;
     const productWithCode = await productsModel.findOne({ code })
 
-    //Validaciones
+    //Comprobando que no falten datos o que no esten vacíos
 
     if (!title || !description || !price || !code || !stock || !category || !thumbnails) return res.status(400).send({ status: 'error', error: 'Datos incompletos, por favor, verifica que los datos se estén enviando correctamente' });
 
@@ -59,7 +86,7 @@ router.get('/:pId', async (req, res) => {
     if (product) {
       res.send({ status: "success", message: `El producto '${product.title}', se ha cargado correctamente`, payload: product });
     } else {
-      res.status(400).send({status:"error", error:'Producto no encontrado'});
+      res.status(400).send({ status: "error", error: 'Producto no encontrado' });
     }
   } catch (error) {
     console.log(error);
@@ -82,10 +109,10 @@ router.put('/:pId', async (req, res) => {
 
 router.delete('/:pId', async (req, res) => {
   try {
-  const productId = req.params.pId;
-  const result = await productManager.deleteProduct(productId);
-  console.log(result);
-  res.send({ status: "success", message: "Su producto ha sido eliminado con éxito" })
+    const productId = req.params.pId;
+    const result = await productManager.deleteProduct(productId);
+    console.log(result);
+    res.send({ status: "success", message: "Su producto ha sido eliminado con éxito" })
   } catch (error) {
     console.error(error);
     res.status(500).send({ status: "error", error: 'Error interno del servidor' });
@@ -93,7 +120,7 @@ router.delete('/:pId', async (req, res) => {
 });
 
 
-/* FS */
+/* FileSystem */
 /* router.get('/', async (req, res) => {
   try {
     let products;
