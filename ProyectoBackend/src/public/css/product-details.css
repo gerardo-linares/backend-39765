@@ -1,3 +1,4 @@
+
 .carts-container_title {
     font-size: 28px;
     text-align: center;
@@ -59,4 +60,13 @@
   .carts-form button:hover {
     background-color: #45a049;
   }
-  
+  .carts-continue{
+    padding: 10px 20px;
+  background-color: #66a3ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    
+  }

@@ -73,9 +73,19 @@
 
 .carts-generate-order-button__generate {
   padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.carts-continue{
+  padding: 10px 20px;
   background-color: #66a3ff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
+  
 }

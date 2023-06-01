@@ -1,6 +1,27 @@
+<div class="session-buttons-container">
+  {{#if user}}
+<a href="/carts/{{cartId}}" class="cart-button">Carrito</a>
 
+    <form action="/api/session/logout" method="POST" style="display: inline;">
+      <button type="submit" class="logout-button">Cerrar sesión</button>
+    </form>
+  {{else}}
+    <a href="/login" class="login-button">Iniciar sesión</a>
+    <a href="/register" class="register-button">Registrarse</a>
+  {{/if}}
+</div>
+
+
+
+{{#if user.name}}
+  <div class="welcome-container">
+    <h1 class="welcome-title">Bienvenido <span class="user-name">{{user.name}}</span></h1>
+    <p class="user-email">Correo: {{user.email}}</p>
+  </div>
+{{/if}}
 
 <h1 class="products-title">Lista de Productos</h1>
+
 <div class="products-card">
   {{#each products}}
   <div class="products-item">
@@ -14,13 +35,13 @@
     <p>Precio: ${{this.price}}</p>
     
     <p>{{this.status}}</p>
-    <a href="/products/{{this._id}}"><button>Ver Detalles</button></a>
+    <a href="/products/{{this._id}}" class="products-btn"><button>Ver Detalles</button></a>
   </div>
   {{/each}}
 </div>
 
 <!-- Botones de paginación -->
-<div class="products-btn">
+<div class="products-btn_page">
   {{#if hasPrevPage}}
   <a href="/products/?page={{prevPage}}"><button>Anterior</button></a>
   {{/if}}
@@ -29,3 +50,5 @@
   <a href="/products/?page={{nextPage}}"><button>Siguiente</button></a>
   {{/if}}
 </div>
+
+

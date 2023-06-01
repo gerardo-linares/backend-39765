@@ -10,18 +10,21 @@ const productManager = new ProductsManager();
 const router = Router();
 
 
-/* MongoDB */
+
+/* Endpoint para obtener la lista de productos */
 router.get('/', async (req, res) => {
   try {
     const { page = 1, category } = req.query;
+    // Obtener la lista de productos paginada y ordenada por precio ascendente
     const { docs, hasPrevPage, hasNextPage, prevPage, nextPage, ...rest } = await usersModel.paginate(
-      { /* category: "frutas" */ },
+      { /* category: "figuras" */ },
       {
-        page, limit: 5,
+        page,
+        limit: 10,
         lean: true,
         sort: { price: 1 }
       });
-    const products = docs
+    const products = docs;
 
     const totalPages = rest.totalPages;
     const prevLink = hasPrevPage ? `/api/products?page=${prevPage}` : null;
@@ -47,14 +50,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+/* Endpoint para agregar un nuevo producto */
 router.post('/', async (req, res) => {
   try {
     const { title, description, price, code, stock, category, thumbnails } = req.body;
     const productWithCode = await productsModel.findOne({ code })
 
-    //Comprobando que no falten datos o que no esten vacíos
-
-    if (!title || !description || !price || !code || !stock || !category || !thumbnails) return res.status(400).send({ status: 'error', error: 'Datos incompletos, por favor, verifica que los datos se estén enviando correctamente' });
+    // Comprobando que no falten datos o que no estén vacíos
+    if (!title || !description || !price || !code || !stock || !category || !thumbnails) {
+      return res.status(400).send({ status: 'error', error: 'Datos incompletos, por favor, verifica que los datos se estén enviando correctamente' });
+    }
 
     const existingProduct = productWithCode;
     if (existingProduct) {
@@ -79,6 +85,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+/* Endpoint para obtener un producto por su ID */
 router.get('/:pId', async (req, res) => {
   try {
     const productId = req.params.pId;
@@ -94,6 +101,7 @@ router.get('/:pId', async (req, res) => {
   }
 });
 
+/* Endpoint para actualizar un producto por su ID */
 router.put('/:pId', async (req, res) => {
   try {
     const productId = req.params.pId;
@@ -107,6 +115,7 @@ router.put('/:pId', async (req, res) => {
   }
 })
 
+/* Endpoint para eliminar un producto por su ID */
 router.delete('/:pId', async (req, res) => {
   try {
     const productId = req.params.pId;
@@ -118,6 +127,7 @@ router.delete('/:pId', async (req, res) => {
     res.status(500).send({ status: "error", error: 'Error interno del servidor' });
   }
 });
+
 
 
 /* FileSystem */

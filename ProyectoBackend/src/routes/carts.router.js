@@ -7,7 +7,11 @@ import productsModel from "../dao/mongo/models/products.js"
 const cartManager = new CartsManager();
 const router = Router();
 
+
+
 /* MongoDB */
+
+// Endpoint para obtener todos los carritos de compras
 router.get('/', async (req, res) => {
   try {
     const carts = await cartManager.getCarts();
@@ -17,17 +21,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Endpoint para agregar un nuevo carrito de compras
 router.post('/', async (req, res) => {
   try {
     const { name, price } = req.body;
 
-    //Verificando que los campos name y price se envien correctamente.
+    // Verificando que los campos name y price se envíen correctamente
     if (!name || !price) {
-      console.log(name);
       throw new Error("El 'name' y 'price' del producto deben estar indicados");
     }
 
-    //Verificando que los campos name y price sean de tipo string y number respectivamente.
+    // Verificando que los campos name y price sean de tipo string y number respectivamente
     if (typeof name !== 'string' || typeof price !== 'number') {
       throw new Error("El 'name' debe ser de tipo 'String' y el 'price' de tipo 'Number'")
     }
@@ -39,6 +43,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Endpoint para obtener un carrito de compras por ID
 router.get('/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid;
@@ -54,6 +59,7 @@ router.get('/:cid', async (req, res) => {
   }
 });
 
+// Endpoint para actualizar un carrito de compras por ID
 router.put('/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid;
@@ -78,6 +84,7 @@ router.put('/:cid', async (req, res) => {
   }
 });
 
+// Endpoint para eliminar un carrito de compras por ID
 router.delete('/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid;
@@ -92,6 +99,7 @@ router.delete('/:cid', async (req, res) => {
   }
 });
 
+// Endpoint para agregar un producto a un carrito de compras
 router.post('/:cid/product/:pid', async (req, res) => {
   try {
     const cid = (req.params.cid);
@@ -116,6 +124,7 @@ router.post('/:cid/product/:pid', async (req, res) => {
   }
 });
 
+// Endpoint para actualizar la cantidad de un producto en un carrito de compras
 router.put('/:cid/product/:pid', async (req, res) => {
   try {
     const cid = (req.params.cid);
@@ -140,6 +149,7 @@ router.put('/:cid/product/:pid', async (req, res) => {
   }
 });
 
+// Endpoint para eliminar un producto de un carrito de compras
 router.delete('/:cid/product/:pid', async (req, res) => {
   const {cid, pid} = req.params;
 
@@ -156,6 +166,7 @@ router.delete('/:cid/product/:pid', async (req, res) => {
     res.status(500).send({ status: "error", error: error.message })
   }
 })
+
 
 
 /* FileSystem */
