@@ -6,8 +6,14 @@ export default class SessionManager {
         return userModel.create(userData);
     };
 
-    loginUser = async (email, password) => {
-        const user = await userModel.findOne({ email, password });
+    loginUser = async (email) => {
+        const user = await userModel.findOne({ email});
         return user;
     };
+
+    findUser = (email) =>{
+        return userModel.findOne({email})
+
+    }
+
 }

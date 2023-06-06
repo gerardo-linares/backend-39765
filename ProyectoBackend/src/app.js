@@ -27,7 +27,7 @@ const connection = mongoose.connect(process.env.URL_MONGO)
 
 app.use(session({
     store: new MongoStore({
-      mongoUrl:'mongodb+srv://geracoder:123@cluster10.0mmfpad.mongodb.net/ecommerce',
+      mongoUrl: process.env.URL_MONGO,
       ttl: 8000,
     }),
     secret: "Gerasecret",
