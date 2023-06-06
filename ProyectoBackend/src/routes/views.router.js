@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { privacy } from "../middlewares/auth.js";
 import ProductsManager from "../dao/mongo/Managers/ProductsManager.js";
 import CartsManager from "../dao/mongo/Managers/CartsManager.js";
 import productsModel from "../dao/mongo/models/products.js";
@@ -29,10 +30,12 @@ router.get('/cartss', async (req, res) => {
   res.render('carts', { carts, css: "carts" });
 });
 
+
 /* Endpoint para la página de chat */
 router.get('/chat', async (req, res) => {
   res.render('chat');
 });
+
 
 /* Endpoint para la página de productos */
 router.get('/products', async (req, res) => {
@@ -81,6 +84,7 @@ router.get('/products', async (req, res) => {
   }
 });
 
+
 /* Endpoint para la página de detalles de un producto */
 router.get('/products/:id', async (req, res) => {
   const productId = req.params.id;
@@ -101,6 +105,7 @@ router.get('/products/:id', async (req, res) => {
   }
 });
 
+
 /* Endpoint para la página de detalles de un carrito */
 router.get('/carts/:cid', async (req, res) => {
   const cartId = req.params.cid;
@@ -120,6 +125,8 @@ router.get('/carts/:cid', async (req, res) => {
     res.status(500).send({ status: "error", error: error.message });
   }
 });
+
+
 
 /* Endpoint para agregar un producto a un carrito */
 router.post("/add-to-cart", async (req, res) => {
@@ -164,12 +171,23 @@ router.post("/add-to-cart", async (req, res) => {
   }
 });
 
-router.get('/register', async (req, res) => {
+
+
+
+router.get('/register',privacy('NO_AUTHENTICATED') ,async (req, res) => {
   res.render('register', {css: 'register'});
 });
 
-router.get('/login', async (req, res) => {
+
+
+router.get('/login',privacy('NO_AUTHENTICATED'),  async (req, res) => {
   res.render('login',{css:'login'});
+});
+
+
+
+router.get('/profile',privacy('PRIVATE'),  async (req, res) => {
+  res.render('profile',{css:'profile', user:req.session.user});
 });
 
 
