@@ -10,10 +10,4 @@ export default class SessionManager {
         const user = await userModel.findOne({ email});
         return user;
     };
-
-    findUser = (email) =>{
-        return userModel.findOne({email})
-
-    }
-
 }

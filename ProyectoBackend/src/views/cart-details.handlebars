@@ -20,8 +20,12 @@
                 <span class="carts-list_value">${{this.product.price}}</span>
             </div>
             <div class="carts-list-row_item">
-                <span class="carts-list_label">Cantidad:</span>
-                <span class="carts-list_value">{{this.quantity}}</span>
+                <span class="carts-list_label"></span>
+                <div class="carts-quantity-control">
+                    <button class="carts-quantity-button carts-quantity-minus">-</button>
+                    <span class="carts-quantity-value">{{this.quantity}}</span>
+                    <button class="carts-quantity-button carts-quantity-plus">+</button>
+                </div>
             </div>
             <div class="carts-list-row_item">
                 <button class="carts-list_remove-button">Eliminar</button>

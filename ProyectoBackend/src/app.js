@@ -3,6 +3,8 @@ import handlebars from 'express-handlebars';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import dotenv  from 'dotenv'
+import passport from 'passport';
+import initializePassport from './config/passport.config.js';
 
 import viewsRouter from './routes/views.router.js'
 import productsRouter from './routes/products.router.js';
@@ -13,6 +15,7 @@ import registerChatHandler from './listeners/chatHandler.js';
 import __dirname from './utils.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+
 
 
 
@@ -46,11 +49,15 @@ app.use((req,res,next) => {
   next();
 })
 
+app.use(passport.initialize());
+initializePassport();
 
 //Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'handlebars');
+
+
 
 app.use('/api/session', sessionRouter);
 app.use('/api/products', productsRouter);
