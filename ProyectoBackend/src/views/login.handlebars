@@ -2,11 +2,11 @@
     <form class="login-form" id="loginForm">
         <h1 class="login-title">Iniciar sesión</h1>
 
-        <label class="login-label">Email</label>
-        <input class="login-input" type="email" name="email">
+        <label for="loginEmail" class="login-label">Email</label>
+        <input class="login-input" type="email" name="email" id="loginEmail" autocomplete="email">
 
-        <label class="login-label">Contraseña</label>
-        <input class="login-input" type="password" name="password">
+        <label for="loginPassword" class="login-label">Contraseña</label>
+        <input class="login-input" type="password" name="password" id="loginPassword" autocomplete="current-password">
 
         <input class="login-submit" type="submit" value="Iniciar sesión">
 
@@ -16,8 +16,5 @@
         </div>
     </form>
 </div>
-
-
-
 
 <script src="/js/login.js"></script>

@@ -88,7 +88,7 @@ router.put('/:cid', async (req, res) => {
 });
 
 
-// Endpoint para eliminar un carrito de compras por ID
+// Endpoint para eliminar un carrito de compras por ID FUNCIONA
 router.delete('/:cid', async (req, res) => {
   try {
     const cartId = req.params.cid;
@@ -156,7 +156,7 @@ router.put('/:cid/product/:pid', async (req, res) => {
 });
 
 
-// Endpoint para eliminar un producto de un carrito de compras
+// Endpoint para eliminar un producto de un carrito de compras FUNCIONA
 router.delete('/:cid/product/:pid', async (req, res) => {
   const {cid, pid} = req.params;
 

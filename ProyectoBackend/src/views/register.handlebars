@@ -2,21 +2,20 @@
     <form class="register-form" id="registerForm">
         <h1 class="register-title">Regístrate</h1>
 
-        <label class="register-label">Nombre</label>
-        <input class="register-input" type="text" name="firstName">
+        <label for="fName" class="register-label">Nombre</label>
+        <input class="register-input" id="fName" type="text" name="firstName" autocomplete="given-name">
 
-        <label class="register-label">Apellido</label>
-        <input class="register-input" type="text" name="lastName">
+        <label for="lName" class="register-label">Apellido</label>
+        <input class="register-input" id="lName" type="text" name="lastName" autocomplete="family-name">
 
-        <label class="register-label">Email</label>
-        <input class="register-input" type="email" name="email">
+        <label for="forEmail" class="register-label">Email</label>
+        <input class="register-input" id="forEmail" type="email" name="email" autocomplete="email">
 
-        <label class="register-label">Contraseña</label>
-        <input class="register-input" type="password" name="password">
+        <label for="forPassword" class="register-label">Contraseña</label>
+        <input class="register-input" id="forPassword" type="password" name="password" autocomplete="new-password">
 
         <input class="register-submit" type="submit" value="Registrar">
     </form>
 </div>
-
 
 <script src="/js/register.js"></script>
