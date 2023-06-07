@@ -1,7 +1,7 @@
 import passport from "passport";
 import local from "passport-local";
 import userModel from "../dao/mongo/models/user.js";
-import { createHAsh, validatePassword} from "../utils.js";
+import { createHash, validatePassword} from "../utils.js";
 
 const localStrategy = local.Strategy;
 
@@ -20,7 +20,7 @@ const initializePassport = () => {
             return done(null, false, { message: "El usuario ya existe" });
 
           //2 sino existe, ahora encripta
-          const hashedPassword = await createHAsh(password);
+          const hashedPassword = await createHash(password);
           // crea el usuario a registrar
           const user = {
             firstName,
@@ -53,7 +53,7 @@ const initializePassport = () => {
 }
 let user;
 // existe el usuario?
-     user = await userModel.findOne({email});
+    user = await userModel.findOne({email});
     if (!user) {
       return done(null,false,{message:"Credenciales incorrectas"})
     
@@ -61,8 +61,9 @@ let user;
 //si existe , verifica el password encriptado
     const isValidPassword = await validatePassword(password, user.password);
 
-    if (!validatePassword)
-      return done(null,false,{message:"contraseña incorrecta"})
+    if (!isValidPassword)
+    return done(null,false,{message:"contraseña incorrecta"})
+  
 
 //si el usuario existe y su contrañea es correcta, crea sesion.
     const cartId = user.cartId; // Obtener el ID del carrito del usuario desde la base de datos

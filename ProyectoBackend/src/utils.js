@@ -4,7 +4,7 @@ import bycrpt from 'bcrypt'
 
 
 
-export const createHAsh = async(password) =>{
+export const createHash = async(password) =>{
     //genera salts
     const salts = await bycrpt.genSalt(10)
     return bycrpt.hash(password,salts);

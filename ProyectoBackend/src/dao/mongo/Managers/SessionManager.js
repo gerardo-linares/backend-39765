@@ -11,3 +11,15 @@ export default class SessionManager {
         return user;
     };
 }
+
+
+//OPCION PARA REUTILIZAR EN PASSPORT // A REVISAR
+// findUserBy = async (field, value) => {
+//     const query = {};
+//     query[field] = value;
+//     const user = await userModel.findOne(query);
+//     return user;
+//   };
+
+//   const userByEmail = await sessionManager.findUserBy("email", email);
+// const userById = await sessionManager.findUserBy("_id", id);
