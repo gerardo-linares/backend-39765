@@ -47,3 +47,27 @@
 .register-submit:hover {
     background-color: #45a049;
 }
+
+
+
+.register-redirect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.register-redirect-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.register-redirect-link {
+    color: green;
+    text-decoration: none;
+}
+
+.register-redirect-link:hover {
+    text-decoration: underline;
+}

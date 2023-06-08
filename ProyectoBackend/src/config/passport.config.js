@@ -1,5 +1,6 @@
 import passport from "passport";
 import local from "passport-local";
+import GithubStrategy from "passport-github2"
 import userModel from "../dao/mongo/models/user.js";
 import { createHash, validatePassword} from "../utils.js";
 
@@ -77,13 +78,43 @@ let user;
 
 return done(null,user);
 
-
-
   }))
+
+
+  passport.use('github', new GithubStrategy({
+    clientID : process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL:process.env.CALLBACK_URL,
+    
+  }, async(accessToken, refreshToken,profile, done)=>{
+    try {   
+    // console.log(profile)
+    //tomo los datos//
+    const {name, email} = profile._json;
+    const user = await userModel.findOne({email});
+    if(!user){
+      //sino existe, lo crea
+      const newUser = {
+        firstName: name,
+        email,
+        password:''
+      }
+      const result = await userModel.create(newUser);
+      done(null,result);
+      //si el usuario existia, se actualiza     
+    }
+    done(null,user)
+    } catch (error) {
+      done(error);
+    }
+  })
+  )
 
   passport.serializeUser(function(user,done){
     return done(null,user.id);
   })
+
+
   passport.deserializeUser(async function(id,done){
     const user = await userModel.findOne({_id : id})
     return done(null,user);

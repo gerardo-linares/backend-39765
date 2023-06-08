@@ -48,5 +48,17 @@ router.post('/logout', async (req, res) => {
 });
 
 
+router.get("/github", passport.authenticate("github"), (req, res) => {});
+router.get("/githubcallback", passport.authenticate("github"), (req, res) => {
+  const user = req.user;
+  //aqui creo la session.
+  req.session.user = {
+    id: user.id,
+    name: user.firstName,
+    email: user.email,
+    role: user.role,
+  };
+  res.redirect("/products");
+});
 
 export default router;
