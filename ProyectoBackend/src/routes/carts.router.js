@@ -1,194 +1,42 @@
 import { Router } from "express";
-//import CartManager from "../../managers/fs/Cart.Managers.js";
-import CartsManager from "../dao/mongo/Managers/CartsManager.js";
-import productsModel from "../dao/mongo/models/products.js"
+import {
+  getAllCarts,
+  createCart,
+  getCartById,
+  updateCartById,
+  deleteAllProducts,
+  addProductToCart,
+  updateProductQuantity,
+  deleteProductFromCart,
+} from "../controllers/carts.controller.js";
 
-//const cartManager = new CartManager();
-const cartManager = new CartsManager();
 const router = Router();
 
-
-
-/* MongoDB */
-
 // Endpoint para obtener todos los carritos de compras
-router.get('/', async (req, res) => {
-  try {
-    const carts = await cartManager.getCarts();
-    res.status(200).send({ status: "success", payload: carts });
-  } catch (error) {
-    res.status(500).send({ status: "error", error: 'Error interno del servidor' })
-  }
-});
+router.get("/", getAllCarts);
 
+// Endpoint para crear un nuevo carrito de compras
+router.post("/", createCart);
 
-// Endpoint para agregar un nuevo carrito de compras
-router.post('/', async (req, res) => {
-  try {
-    const { name, price } = req.body;
+// Endpoint para obtener un carrito de compras por su ID
+router.get("/:cid", getCartById);
 
-    // Verificando que los campos name y price se envíen correctamente
-    if (!name || !price) {
-      throw new Error("El 'name' y 'price' del producto deben estar indicados");
-    }
+// Endpoint para actualizar un carrito de compras por su ID
+router.put("/:cid", updateCartById);
 
-    // Verificando que los campos name y price sean de tipo string y number respectivamente
-    if (typeof name !== 'string' || typeof price !== 'number') {
-      throw new Error("El 'name' debe ser de tipo 'String' y el 'price' de tipo 'Number'")
-    }
-
-    const newCart = await cartManager.addCart({ name, price });
-    res.status(200).send({ status: "success", cart: newCart });
-  } catch (error) {
-    res.status(500).send({ status: "error", error: error.message });
-  }
-});
-
-
-// Endpoint para obtener un carrito de compras por ID
-router.get('/:cid', async (req, res) => {
-  try {
-    const cartId = req.params.cid;
-    const cart = await cartManager.getCartById(cartId).populate('products.product');
-    if (cart) {
-      res.send({ status: "success", message: `El cartito '${req.params.cid}' se ha cargado con exito`, payload: cart });
-    } else {
-      res.status(400).send({ status: "error", error: 'Producto no encontrado, ingrese una Id valida' });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "error", error: error.message })
-  }
-});
-
-
-// Endpoint para actualizar un carrito de compras por ID
-router.put('/:cid', async (req, res) => {
-  try {
-    const cartId = req.params.cid;
-    const updatedProducts = req.body.products;
-
-    // Verificando si los productos existen en la base de datos
-    const productIds = updatedProducts.map(product => product.product);
-    const existingProducts = await productsModel.find({ _id: { $in: productIds } });
-
-    // Validando si se encontraron todos los productos
-    if (existingProducts.length !== productIds.length) {
-      res.status(400).send({ error: "Una o más IDs de productos no existen en la base de datos. Por favor, ingrese IDs válidas" });
-      return;
-    }
-
-    const updatedCart = await cartManager.updateCart(cartId, updatedProducts);
-
-    res.status(200).send({ status: "success", message: `Carrito actualizado correctamente`, payload: updatedCart });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "error", error: error.message });
-  }
-});
-
-
-// Endpoint para eliminar un carrito de compras por ID FUNCIONA
-router.delete('/:cid', async (req, res) => {
-  try {
-    const cartId = req.params.cid;
-    const deleteProducts = [];
-
-    const deleteAllProducts = await cartManager.deleteAllProducts(cartId, deleteProducts);
-
-    res.status(200).send({ status: "success", message: `Productos del carrito eliminados con éxito`, payload: deleteAllProducts });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "error", error: error.message });
-  }
-});
-
+// Endpoint para eliminar todos los productos de un carrito de compras
+router.delete("/:cid/products", deleteAllProducts);
 
 // Endpoint para agregar un producto a un carrito de compras
-router.post('/:cid/product/:pid', async (req, res) => {
-  try {
-    const cid = (req.params.cid);
-    const pid = (req.params.pid);
-    const quantity = (req.body.quantity);
-
-    // Validando si el ID del producto es mayor que 0
-    if (pid <= 0) {
-      throw new Error('El Id del producto debe ser mayor que 0.');
-    }
-
-    const updatedCart = await cartManager.addProductToCart(cid, pid, quantity);
-    if (updatedCart) {
-      res.status(200).send({ status: "success", message: `Producto agregado correctamente al carrito '${req.params.cid}'`, payload: updatedCart })
-    } else {
-      res.status(400).send({ status: "error", error: error.message })
-    }
-
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "error", error: error.message })
-  }
-});
-
+router.post("/:cid/products/:pid", addProductToCart);
 
 // Endpoint para actualizar la cantidad de un producto en un carrito de compras
-router.put('/:cid/product/:pid', async (req, res) => {
-  try {
-    const cid = (req.params.cid);
-    const pid = (req.params.pid);
-    const quantity = (req.body.quantity);
+router.put("/:cid/products/:pid", updateProductQuantity);
 
-    // Validando si el ID del producto es mayor que 0
-    if (pid <= 0) {
-      throw new Error('El Id del producto debe ser mayor que 0.');
-    }
+// Endpoint para eliminar un producto de un carrito de compras
+router.delete("/:cid/products/:pid", deleteProductFromCart);
 
-    const updatedProductQuantity = await cartManager.updateProductQuantity(cid, pid, quantity);
-    if (updatedProductQuantity) {
-      res.status(200).send({ status: "success", message: `Cantidad actualizada correctamente`, payload: updatedProductQuantity })
-    } else {
-      res.status(400).send({ status: "error", error: error.message })
-    }
-
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "error", error: error.message })
-  }
-});
-
-
-// Endpoint para eliminar un producto de un carrito de compras FUNCIONA
-router.delete('/:cid/product/:pid', async (req, res) => {
-  const {cid, pid} = req.params;
-
-  try {
-    const cart = await cartManager.deleteProductFromCart(cid, pid);
-
-    // Consulta para obtener el título del producto eliminado
-    const deleteProduct = await productsModel.findById(pid);
-
-    res.status(200).send({ status: "success", message: `El producto '${deleteProduct.title}' ha sido eliminado con exito`, payload: deleteProduct});
-
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ status: "error", error: error.message })
-  }
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default router;
 
 /* FileSystem */
 /* router.get('/', async (req, res) => {
@@ -242,20 +90,12 @@ router.delete('/:cid/product/:pid', async (req, res) => {
   }
 }); */
 
-export default router;
-
-
-
-
 // //**TEST POSTMAN
 
 // Obtener todos los carritos:
 //  GET http://localhost:8080/api/carts
 
-
-
-
-// Agregar un nuevo carrito: 
+// Agregar un nuevo carrito:
 // POST http://localhost:8080/api/carts
 
 // {
@@ -271,28 +111,17 @@ export default router;
 //   ]
 // }
 
-
-
 // Obtener un carrito por su ID:
 //  GET http://localhost:8080/api/carts/:cid
-
-
 
 // Agregar un producto a un carrito:
 //  POST http://localhost:8080/api/carts/:cid/product/:pid
 
-
-
-// Eliminar un producto del carrito: 
+// Eliminar un producto del carrito:
 // DELETE http://localhost:8080/api/carts/:cid/products/:pid
 
-
-
-// Eliminar todos los productos del carrito: 
+// Eliminar todos los productos del carrito:
 // DELETE http://localhost:8080/api/carts/:cid
-
-
-
 
 // Actualizar el carrito con un arreglo de productos:
 //  PUT http://localhost:8080/api/carts/:cid
@@ -310,17 +139,12 @@ export default router;
 //   ]
 // }
 
-// Actualizar la cantidad de ejemplares de un producto en el carrito: 
+// Actualizar la cantidad de ejemplares de un producto en el carrito:
 // PUT http://localhost:8080/api/carts/:cid/products/:pid
 
 // {
 //   "quantity": 5
 // }
-
-
-
-
-
 
 //TEST FILTROS//
 
